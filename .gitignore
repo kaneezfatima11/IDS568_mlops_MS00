@@ -1,0 +1,19 @@
+#python artifects
+
+__pycache__/
+*.py[cod]
+
+#Virtual environment 
+venv/
+.venv/
+
+#test cache
+.pytest_cache/
+
+#data and models
+data/
+*.pkl
+*.h5
+
+#Secrets (never commit)
+.env
