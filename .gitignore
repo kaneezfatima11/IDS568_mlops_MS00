@@ -12,7 +12,6 @@ venv/
 
 #data and models
 data/
-*.pkl
 *.h5
 
 #Secrets (never commit)
