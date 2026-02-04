@@ -20,36 +20,37 @@ In parallel, a stateless serverless inference endpoint was implemented using Goo
 
 Cloud Run offers greater flexibility and control over dependencies and runtime configuration, while Cloud Functions provide simpler deployment with minimal infrastructure management. Both approaches highlight trade-offs in cold-start behavior, scalability, and lifecycle management within modern MLOps systems.
 
-Project Overview
+**Project Overview**
 This project demonstrates an end-to-end MLOps workflow that transitions a trained machine learning model from local development to production-ready inference services. The goal of Milestone 1 is to ensure reproducibility, reliable serving, and scalable deployment using both container-based and serverless cloud platforms.
 
-Setup and Deployment Instructions
+**Setup and Deployment Instructions**
 The project is developed in an isolated Python virtual environment to ensure consistent dependency management and reproducibility across systems. All required libraries are pinned in a requirements file. Docker Desktop is used to containerize the application, and the Google Cloud CLI is used for cloud deployment and service management.
-Model Training
+
+**Model Training**
 The machine learning model is trained using a dedicated training script. The trained model is serialized into a reusable artifact file and stored in the project repository. This artifact is reused across all serving environments to guarantee consistent inference behavior.
 
-Local API Serving with FastAPI
+**Local API Serving with FastAPI**
 A FastAPI application exposes the trained model through REST endpoints. The model artifact is loaded once at application startup to ensure deterministic predictions and efficient request handling. The application includes a health endpoint for service monitoring and a prediction endpoint that accepts numerical feature inputs and returns model predictions in JSON format.
 
-API Usage Examples
+**API Usage Examples**
 Clients interact with the service by sending HTTP requests containing numerical feature vectors. The prediction endpoint processes the input features and returns a structured prediction response. The health endpoint confirms service availability and readiness
 Automated Testing and Continuous Integration
 Automated tests validate the health and prediction endpoints. A continuous integration pipeline runs these tests in a clean environment on every commit, ensuring reproducible behavior and preventing environment-specific failures.
 
-Cloud Deployment using Google Cloud Run
+**Cloud Deployment using Google Cloud Run**
 The FastAPI application is containerized using Docker and deployed to Google Cloud Run. This deployment represents a stateful, container-based serving approach where the model artifact is loaded at startup. Cloud Run provides scalability, runtime flexibility, and controlled dependency management.
 
-Serverless Deployment using Google Cloud Functions
+**Serverless Deployment using Google Cloud Functions**
 A stateless inference endpoint is implemented using Google Cloud Functions. The same trained model artifact is packaged with the function and executed on demand. This approach demonstrates an event-driven serving model with minimal infrastructure management.
 
-ML Lifecycle Stage Explanation
+**ML Lifecycle Stage Explanation**
 This milestone spans multiple stages of the machine learning lifecycle, including training, packaging, validation, serving, and deployment. The consistent reuse of the trained model artifact across all environments ensures reliability and reproducibility throughout the lifecycle.
 
-Model–API Interaction
+**Model–API Interaction**
 The API receives feature vectors in JSON format, transforms them into the appropriate numerical structure, and passes them to the trained model for inference. Predictions are returned as structured JSON responses, enabling seamless integration with downstream systems.
 
-Deployment Pattern Comparison
+**Deployment Pattern Comparison**
 The Cloud Run deployment provides greater control over runtime configuration and is suitable for complex, stateful services. Cloud Functions offer a lightweight, stateless deployment model with reduced operational overhead. This comparison highlights trade-offs related to scalability, cold-start behavior, and lifecycle management.
 
-Conclusion
+**Conclusion**
 Milestone 1 demonstrates how a trained machine learning model can be reliably deployed across local, containerized, and serverless environments. By combining reproducible environments, automated testing, and cloud-native serving strategies, the project showcases best practices in modern MLOps.
